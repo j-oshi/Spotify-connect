@@ -1,0 +1,62 @@
+name: spotify-app
+recipe: drupal9
+config:
+  xdebug: false
+  webroot: web
+  php: '7.4'
+  conf:
+    php: .vscode/php.ini
+excludes:
+  - db
+  - vendor
+  - web/sites/default/files
+  - node_modules
+proxy:
+  phpmyadmin:
+    - phpmyadmin.spotify.local
+  appserver:
+    - spotify.lndo.site
+services:
+  appserver:
+    xdebug: false
+    config:
+      php: .vscode/php.ini
+    overrides:
+      environment:
+        DRUSH_OPTIONS_ROOT: /app/web
+        DRUSH_OPTIONS_URI: 'https://spotify.lndo.site'
+  database:
+    creds:
+      user: database
+      password: database
+      database: database
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+tooling:
+  drush:
+    service: appserver
+    cmd: /app/vendor/bin/drush
+  site-install:
+    service: appserver
+    cmd: bash /app/scripts/utils/install.sh
+  remigrate:
+    service: appserver
+    cmd: >-
+      drush migrate:rollback --all --group=example && drush mim --all
+      --group=example
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for apache.
+    cmd: docker-php-ext-enable xdebug && /etc/init.d/apache2 reload
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for apache.
+    cmd: >-
+      rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini &&
+      /etc/init.d/apache2 reload
+    user: root
+env_file:
+  - .env

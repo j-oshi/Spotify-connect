@@ -1,0 +1,5 @@
+services:
+  spotify.artist:
+    class: Drupal\spotify\ArtistService
+  spotify.api:
+    class: Drupal\spotify\SpotifyApiService

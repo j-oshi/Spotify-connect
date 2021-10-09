@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ * SPotify artist sync install table.
+ */
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema().
+ */
+function spotify_schema()
+{
+  $schema = [];
+  // Check if the table exists first.  If not, then create the entity.
+  try {
+    $schema['spotify_artist_info'] = [
+      'description' => 'Shows spotify artist info',
+      'fields' => [
+        'nid' => [
+          'description' => 'The primary identifier for a artist.',
+          'type' => 'serial',
+          'not null' => true,
+          'unsigned' => true,
+        ],
+        'artist_id' => [
+          'description' => 'Artist id',
+          'type' => 'varchar',
+          'length' => 500,
+          'not null' => true,
+          'default' => '',
+        ],
+        'name' => [
+          'description' => 'Artist name',
+          'type' => 'varchar_ascii',
+          'length' => 128,
+          'not null' => TRUE,
+          'default' => '',
+        ],
+        'popularity' => [
+          'description' => 'Artist popularity',
+          'type' => 'int',
+          'not null' => true,
+          'default' => 0,
+        ],
+        'external_url' => [
+          'description' => 'Artist url',
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => true,
+          'default' => '',
+        ],
+        // 'genres' => [
+        //   'description' => 'Artist genre',
+        //   'type' => 'text',
+        //   'not null' => TRUE,
+        //   'default' => 'a:0:{}',
+        // ]
+      ],
+      'primary key' => [
+        'nid',
+        'artist_id',
+        'name',
+      ],
+    ];
+
+    return $schema;
+  }
+
+  // catch exception
+  catch (Exception $e) {
+    echo 'Message: ' . $e->getMessage();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function spotify_uninstall()
+{
+  \Drupal::service('module_installer')->uninstall(['spotify_artist_info']);
+}
+
+/**
+  * Implement hook_update_n(). 
+  * Check if table exist before installing
+  */
+function spotify_update_8001() {
+  $schema_create = spotify_schema();
+  $schema = Database::getConnection()->schema();
+  if (!$schema->tableExists('spotify_artist_info'))
+    $schema->createTable('spotify_artist_info', $schema_create['spotify_artist_info']);
+}

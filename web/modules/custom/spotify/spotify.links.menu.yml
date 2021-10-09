@@ -1,0 +1,5 @@
+spotify.admin_settings:
+  title: "Spotify Artist Info"
+  description: "Choose which artist to display."
+  parent: system.admin_config_media
+  route_name: spotify.artist_list
