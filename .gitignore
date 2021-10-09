@@ -48,4 +48,4 @@
 /update.php
 /web.config
 
-.env
+/.env
