@@ -48,6 +48,7 @@
 /update.php
 /web.config
 
-/.env
-/.env-*
-/.env.*
+.env
+.env-*
+.env.*
+vendor
