@@ -814,8 +814,8 @@ $databases['default']['default'] = array (
 );
 $settings['config_sync_directory'] = 'sites/default/files/config_5_KNzOMgd6PhblUzErnBOtnIAPSKH9Y99WNmFHzgoykyZmxbBJyFf25N93_3QHsqAxk3UVgWWQ/sync';
 
-$spotifyClientId = getEnv("CLIENT_ID"); 
-$spotifyClientScret = getenv("CLIENT_SECRET"); 
+$spotifyClientId = getEnv("SPOTIFY_CLIENT_ID"); 
+$spotifyClientScret = getenv("SPOTIFY_CLIENT_SECRET"); 
 
 $settings['spotify_client_id'] = $spotifyClientId;
 $settings['spotify_client_secret'] = $spotifyClientScret;

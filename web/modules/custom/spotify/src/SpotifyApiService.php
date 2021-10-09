@@ -24,7 +24,7 @@ class SpotifyApiService
   }
 
   public function setToken($token) {
-      $this->$accessToken = $token;
+    $this->$accessToken = $token;
   }
 
   public function getToken() {
@@ -55,13 +55,13 @@ class SpotifyApiService
     */
     public function spotifyApiToken()
     {
-      // if ($this->getToken() != null) {
-      //   $token = $this->getToken();
-      // } else {
-      //   $token = $this->accessWIthCodeAuthorization();  
-      // }
-
-      $token = 'BQAN13NjW-bJWVtmCogGm5_35ypiZa2PJFAqMFdv8kkGnX1Lyu7MB2qxQ0MdewMb9dKoYe2Lh1PXfybEGhc';
+      if ($this->getToken() != null) {
+        $token = $this->getToken();
+      } else {
+        $token = $this->accessWIthCodeAuthorization();  
+      }
+      // return $token;
+      // $token = 'BQAN13NjW-bJWVtmCogGm5_35ypiZa2PJFAqMFdv8kkGnX1Lyu7MB2qxQ0MdewMb9dKoYe2Lh1PXfybEGhc';
       $ouath = [
         'headers' => [
           'Accept' => 'application/json',

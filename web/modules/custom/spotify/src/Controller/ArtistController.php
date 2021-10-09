@@ -44,13 +44,6 @@ class ArtistController extends ControllerBase {
    *   A simple renderable array.
    */
   public function artistListPage() {
-    $spotify = \Drupal::service('spotify.api');
-    $ouath = $spotify->spotifyApiToken();
-
-    $response = $this->httpClient->get('https://api.spotify.com/v1/search?q=justin&type=artist&limit=10', $ouath);
-
-    $response = json_decode($response->getBody()->getContents(), TRUE);
-    dump($response);
     $form['form'] = $this->formBuilder()->getForm('Drupal\spotify\Form\ArtistForm');
     // Create table header.
     $header = [
@@ -87,6 +80,7 @@ class ArtistController extends ControllerBase {
     *
     */
   public function artistAdd(Request $request) {
+    $results = [];
     //Get parameter value while submitting add form  
     $artist_id = \Drupal::request()->query->get('artist_id');
 
