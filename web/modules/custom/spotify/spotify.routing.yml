@@ -1,0 +1,74 @@
+spotify.artist_list:
+  path: '/admin/config/artist/list'
+  defaults:
+    _controller: '\Drupal\spotify\Controller\ArtistController::artistListPage'
+    _title: 'Artist list'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
+  options:
+    _admin_route: TRUE
+
+spotify.artist_number_limit:
+  path: '/admin/config/artist/limit-number'
+  defaults:
+    _controller: '\Drupal\spotify\Controller\ArtistController::limitArtistNumber'
+    _title: 'Limit Artist Number Of Display'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
+  options:
+    _admin_route: TRUE
+
+spotify.artist_autocomplete:
+  path: '/admin/config/artist/autocomplete'
+  defaults:
+    _controller: '\Drupal\spotify\Controller\ArtistAutocompleteController::handleAutocomplete'
+    _format: json
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
+  options:
+    _admin_route: TRUE
+
+spotify.add_artist:
+  path: '/admin/config/artist/add'
+  defaults:
+    _form: '\Drupal\spotify\Form\ArtistForm'
+    _title: 'Add Artist to list'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
+  options:
+    _admin_route: TRUE
+
+spotify.add_artist_list:
+  path: '/admin/config/artist/add-list'
+  defaults:
+    _controller: '\Drupal\spotify\Controller\ArtistController::artistAdd'
+    _title: 'Add Artist to list'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
+  options:
+    _admin_route: TRUE
+
+spotify.remove_artist:
+  path: '/admin/config/artist/delete/{nid}'
+  defaults:
+    _controller: '\Drupal\spotify\Controller\ArtistController::removeArtistPage'
+    _title: 'Remove Artist from list'
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
+  options:
+    _admin_route: TRUE
+
+spotify.artist_page:
+  path: 'artist/{nid}'
+  defaults:
+    _controller: '\Drupal\spotify\Controller\ArtistController::artistPage'
+    _title: 'Artist Page'
+  requirements:
+    _permission: 'access content'
+    _user_is_logged_in: 'TRUE'

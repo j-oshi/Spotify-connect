@@ -1,0 +1,30 @@
+Requirement
+- Admin can choose artist to display from spotify
+- Artists selection is limited to 20
+- Artists are displayed in a custom block.
+- An artist content is clickable.
+-- When clicked a new tab is with artist information is displayed.
+-- Only loggin in user can view the page.
+
+Implementation
+- Create artists limit page
+- Create artist add page
+-- Search for artist using auto complete and get id
+-- Use id to get artist information and save to database
+-- On save return to list page
+- Create artist remove page
+-- Remove by artist id
+- Add display block to list artist
+-- Add permission to page
+-- Display artist summary in card
+-- Create artist page
+
+Test
+- Admin can add and remove artist.
+- List is limited to 20.
+- Any user can see list block.
+- Only logged in users can see artist page.
+
+
+
+

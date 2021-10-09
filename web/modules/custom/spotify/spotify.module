@@ -1,0 +1,51 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+
+/**
+ * Implementing hook theme
+ */
+function spotify_theme($existing, $type, $theme, $path) {
+  return [
+    'artist_list' => [
+      'variables' => ['title' => '', 'artists' => []],
+      'template' => 'artist_list'
+    ],    
+    'artist_page' => [
+      'variables' => ['title' => '', 'artist' => []],
+      'template' => 'artist_page'
+    ]
+  ];
+}
+
+
+function get_artist_list() {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+  if (!$schema->tableExists('spotify_artist_info')) {
+    return;
+  }
+
+  $query = $database->select('spotify_artist_info', 'u');
+  $results = $query->extend('\Drupal\Core\Database\Query\PagerSelectExtender')->limit(20);
+  $results->fields('u');
+  $results->orderBy('u.nid','ASC');
+  $artist_results= $results ? $results->execute()->fetchAll() : null;
+
+  $artist_info = [];
+  foreach ($artist_results as $row) {
+    $delete = Url::fromUserInput('/admin/config/artist/delete/' . $row->nid, array('attributes' => array('onclick' => "return confirm('Are you Sure')")));
+    $delete_link = Link::fromTextAndUrl(t('delete'), $delete)->toString();
+    $mainLink = t('@linkReject', array('@linkReject' => $delete_link));
+
+    $artist_info[] = [
+      'id' => $row->nid,
+      'artist_id' => $row->artist_id,
+		  'name' => $row->name,
+      'opt' => $mainLink,
+    ];
+  }
+
+  return $artist_info;
+}

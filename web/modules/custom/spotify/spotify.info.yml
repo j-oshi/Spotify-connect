@@ -1,0 +1,4 @@
+name: Spotify Artist Finder
+description: A module to fetch and display artist from spotify
+type: module
+core_version_requirement: ^9.1
