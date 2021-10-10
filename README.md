@@ -5,7 +5,13 @@ Drupal app is a simple site with a spotify custom module. Module will connect to
 ## Setup
 Clone repository<br >
 Cd into repository<br >
-lando start<br >
+Create an .env file in the root folder<br >
+Add 
+<pre>
+SPOTIFY_CLIENT_ID=**************(spotify client id)
+SPOTIFY_CLIENT_SECRET=************** (spotify client id)
+</pre>
+lando rebuild -y<br >
 composer install<br >
 lando db-import database.2021-10-09-1633810728.sql.gz<br >
 
