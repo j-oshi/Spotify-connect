@@ -26,5 +26,12 @@ Test
 - Only logged in users can see artist page.
 
 
+WHat is not done
+- Refresh token
+- phpunit testing
+
+Token session is for 3600 seconds.
+
+
 
 
