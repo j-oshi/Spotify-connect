@@ -26,7 +26,7 @@ Test
 - Only logged in users can see artist page.
 
 
-WHat is not done
+What is not done
 - Refresh token
 - phpunit testing
 
