@@ -4,7 +4,7 @@ Drupal app is a simple site with a spotify custom module. Module will connect to
 
 ## Setup
 Clone repository<br >
-Cd into repository<br >
+Cd into cloned folder<br >
 Create a .env file in the root folder<br >
 Add 
 <pre>
